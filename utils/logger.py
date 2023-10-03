@@ -3,17 +3,20 @@ import time
 import os
 
 
-class Logger():
+class Logger(object):
 
-    def __init__(self, logger, file_level=logging.INFO):
-        self.logger = logging.getLogger(logger)
-        self.logger.setLevel(logging.DEBUG)
+    def __init__(self, log_level=logging.DEBUG):
 
-        format = logging.Formatter('%(asctime)s - %(filename)s:[%(lineno)s] - [%(levelname)s] - %(message)s')
+        self.logger = logging.getLogger()
+        self.logger.setLevel(log_level)
+        datetime_stamp = '%m/%d/%Y %I:%M:%S %p'
+        format = logging.Formatter('%(asctime)s - %(filename)s : %(funcName)5s : [%(lineno)s] - %(message)s', datefmt=datetime_stamp)
+        LogFileName = os.path.join(os.getcwd(), "Logs", "log.txt")
 
-        current_time = time.strftime("%Y-%m-%d")
-        self.LogFileName = os.path.join(os.getcwd, "Logs", "log", current_time, ".txt")
-        filehandler = logging.FileHandler(self.LogFileName, mode="a")
-        filehandler.setFormatter(format)
-        filehandler.setLevel(file_level)
-        self.logger.addHandler(filehandler)
+        fh = logging.FileHandler(filename=LogFileName)
+        fh.setFormatter(format)
+        fh.setLevel(log_level)
+        self.logger.addHandler(fh)
+
+    def _logger(self):
+        return self.logger
