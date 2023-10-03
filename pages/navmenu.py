@@ -12,6 +12,7 @@ class NavMenu(BasePage):
     profileMenu = (AppiumBy.XPATH, '//android.widget.ImageButton[@content-desc="التنقل إلى أعلى"]')
     menuUserIDValue = (AppiumBy.ID, 'com.hilmk.hilmkMyApp:id/tvMenuUserIdValue')
     loginMenuElement = (AppiumBy.ID, 'com.hilmk.hilmkMyApp:id/menuLogin')
+    registerUserElement = (AppiumBy.ID, 'com.hilmk.hilmkMyApp:id/menuRegister')
         
     
     def __init__(self, driver):
@@ -26,13 +27,13 @@ class NavMenu(BasePage):
 
     def verify_userid_value_present(self):
         try:
-            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((self.menuUserIDValue))).click()
+            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((self.menuUserIDValue)))
         except Exception as e:
             log.debug(str(e))
 
     def verify_login_icon_visible(self):
         try:
-            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((self.loginMenuElement))).click()
+            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((self.loginMenuElement)))
         except Exception as e:
             log.debug(str(e))
 
@@ -40,3 +41,9 @@ class NavMenu(BasePage):
         self.open_nav_menu()
         self.verify_userid_value_present()
         self.verify_login_icon_visible()
+
+    def verify_register_user_option(self):
+        try:
+            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((self.registerUserElement)))
+        except Exception as e:
+            log.debug(str(e))
