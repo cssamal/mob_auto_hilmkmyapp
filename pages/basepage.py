@@ -12,17 +12,21 @@ class BasePage:
     Page class for base or main page with locators and functions.
     """
 
-    appName = (AppiumBy.ID, 'com.hilmk.hilmkMyApp:id/tvAppName')
+    app_name = (AppiumBy.ID, 'com.hilmk.hilmkMyApp:id/tvAppName')
 
     def __init__(self, driver):
         self.driver = driver
 
     def verify_app_name_displayed(self):
         try:
-            appNameElement = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((self.appName)))
+            appNameElement = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((self.app_name)))
         except Exception as e:
             log.debug(str(e))
 
-
-
-    
+    def is_visible(self, element):
+        if WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((element))):
+            log.info(f"{element} visible")
+            return True
+        else:
+            log.info(f"{element} not found")
+        return False
