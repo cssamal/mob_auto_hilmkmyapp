@@ -25,4 +25,4 @@ In Mac:
 `pip install -r requirement.txt`
 
 ### Run tests
-`pytest`
+`pytest tests/ -v`
