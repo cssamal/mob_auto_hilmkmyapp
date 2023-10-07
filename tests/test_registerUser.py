@@ -6,6 +6,7 @@ from pages.basepage import BasePage
 from pages.navmenu import NavMenu
 from pages.registerpage import RegisterPage
 
+@pytest.mark.registered
 @pytest.mark.usefixtures("appium_service", "appium_driver")
 class TestRegisterUser:
     def test_success_register_user(self):

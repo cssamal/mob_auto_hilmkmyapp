@@ -19,7 +19,6 @@ def appium_service():
     yield service
     service.stop()
 
-
 @pytest.fixture(scope='function')
 def appium_driver(request):
     desired_caps = {

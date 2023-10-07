@@ -25,4 +25,8 @@ In Mac:
 `pip install -r requirement.txt`
 
 ### Run tests
-`pytest tests/ -v`
+To run tests for anonymous users:
+`pytest -m anonymous -v`
+
+To run tests for registered users:
+`pytest -m registered -v`
