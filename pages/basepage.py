@@ -54,23 +54,42 @@ class BasePage:
             log.info(f"{element} not found")
         return False
     
-    def click_element(self, locator):
+    def click_element(self, element):
         try:
-            log.info(f"clicking element={locator[1]}")
-            self.driver.find_element(locator[0], locator[1]).click()
+            log.info(f"clicking element={element[1]}")
+            self.driver.find_element(element[0], element[1]).click()
             time.sleep(2)
         except Exception as e:
             log.debug(str(e))
     
-    def send_text(self, locator, text):
-        if locator[0] == 'id':
+    def send_text(self, element, text):
+        if element[0] == 'id':
             try:
-                log.info(f"Sending text={text} to element={locator[1]} ")
-                self.driver.find_element(locator[0], locator[1]).send_keys(str(text))
+                log.info(f"Sending text={text} to element={element[1]} ")
+                self.driver.find_element(element[0], element[1]).send_keys(str(text))
                 time.sleep(2)
             except Exception as e:
                 log.debug(str(e))
         else:
             log.info("Expected locator type is not available")
+    
+    def get_text(self, element):
+        self.is_visible(element)
+        try:
+            text = self.driver.find_element(element[0], element[1]).get_attribute('text')
+            log.info(f"Got the text value text={text} for element={element[1]} ")
+            time.sleep(2)
+            return text
+        except Exception as e:
+            log.debug(str(e))
+
+    def is_checked(self, element):
+        if self.driver.find_element(element[0], element[1]).get_attribute('checked') == 'true':
+            log.info(f"Checkbox selected for element={element[1]} ")
+            time.sleep(2)
+            return True
+        else:
+            log.info(f"Checkbox not selected for element={element[1]} ")
+            return False
 
 
