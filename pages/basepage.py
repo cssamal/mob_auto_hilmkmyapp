@@ -11,7 +11,7 @@ class BasePage:
     """
     Page class for base or main page with locators and functions.
     """
-
+    # app_name locator helps us verify we have landed on home screen next to splash screen
     app_name = ('id', 'com.hilmk.hilmkMyApp:id/tvAppName')
 
     def __init__(self, driver):
